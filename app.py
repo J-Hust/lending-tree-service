@@ -21,7 +21,6 @@ def sure_kid():
     if is_invalid_url(lender_url):
         return 'bad url, homie'
     lender_id = grab_id_from_url(lender_url)
-    print(lender_id)
     final_stuff = src.review_service.get_everything(lender_id)
     return final_stuff
 
