@@ -13,7 +13,10 @@ def get_reviews(link):
         resp = Response(reviews_json, status=200, mimetype='application/json')
         return resp
     else:
-        return 'The supplied url must begin with "https://www.lendingtree.com/" and end with a number'
+        resp = Response('The supplied url must begin with "https://www.lendingtree.com/" and end with a number',
+                        status=400,
+                        mimetype='text/plain')
+        return resp
 
 
 def is_valid_url(url):
