@@ -31,17 +31,65 @@ The server runs on `localhost:5000`.
 2. Make a `GET` request to `localhost:5000/review/{lender_url}`
 
 #### Response
-Responses are JSON formatted.
+Responses are JSON formatted.  An example response is as follows:
 ```json
-{
-  "key1": true,
-  "key2": [
-    {
-      "subkey1": "hi",
-      "subkey2": 22
-    }
-  ]
-}
+[
+  {
+    "id": "5e416ae37f520f0001508adc",
+    "productId": "42825",
+    "productType": "lender",
+    "title": "It was a really good experience. ",
+    "text": "It was so easy to complete the application and the get the money I needed. Very helpful. Thanks so much.",
+    "isRecommended": true,
+    "authorId": "",
+    "authorEmail": "",
+    "anonymousUId": "",
+    "authorName": "Vicky",
+    "userLocation": "GROTTOES, VA",
+    "brandId": "42825",
+    "lenderId": 81638970,
+    "isAuthenticated": false,
+    "isVerifiedCustomer": false,
+    "socialSurveyReviewId": null,
+    "votesUp": 0,
+    "votesDown": 0,
+    "isFlagged": false,
+    "comments": null,
+    "primaryRating": {
+      "value": 4,
+      "name": "Overallrating"
+    },
+    "secondaryRatings": [
+      {
+        "name": "RateRating",
+        "value": 3.0
+      },
+      {
+        "name": "FeesAndCostsRating",
+        "value": 3.0
+      },
+      {
+        "name": "ResponsivenessRating",
+        "value": 5.0
+      },
+      {
+        "name": "CustomerServiceRating",
+        "value": 5.0
+      }
+    ],
+    "properties": [
+      {
+        "name": "RequestType",
+        "value": "Personal Loan"
+      },
+      {
+        "name": "IsLoanClosed",
+        "value": "true"
+      }
+    ],
+    "submissionDateTime": "2020-02-10T09:38:26.509+00:00"
+  }
+]
 ```
 
 ### Future Considerations
