@@ -9,6 +9,7 @@ MAX_RECORDS_PER_REQUEST = 300
 
 
 def fetch_all_reviews(lender_url):
+    """Orchestrate the process of getting all reviews for a particular lender, and return them as JSON."""
     brand_id = retrieve_brand_id(lender_url)
     if not brand_id:
         return 'Could not retrieve brand_id.  Check the url you provided and try again.'
@@ -18,6 +19,7 @@ def fetch_all_reviews(lender_url):
 
 
 def retrieve_brand_id(lender_url):
+    """From the lender url passed in to this service, fetch and return the corresponding brand_id used by Lending Tree's API."""
     try:
         r = requests.get(lender_url)
     except requests.exceptions.RequestException as err:
@@ -32,6 +34,7 @@ def retrieve_brand_id(lender_url):
 
 
 def iterate_reviews(id):
+    """Loop over response pages from Lending Tree's API, building up, and finally returning, a list of all reviews."""
     total_reviews = fetch_review_count(id)
     num_pages = ceil(total_reviews / MAX_RECORDS_PER_REQUEST) + 1
 
@@ -44,6 +47,7 @@ def iterate_reviews(id):
 
 
 def fetch_review_details(id, page_number):
+    """For a given review page, load the JSON and return the relevant part."""
     url = ("https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php"
            f"?RequestType=&productType=&brandId={id}"
            f"&requestmode=reviews&page={page_number}"
@@ -61,6 +65,7 @@ def fetch_review_details(id, page_number):
 
 
 def fetch_review_count(id):
+    """Return the total count of reviews for a particular lender"""
     url = ("https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php"
            f"?RequestType=&productType=&brandId={id}"
            f"&requestmode=stats&page=0"
