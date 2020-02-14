@@ -4,9 +4,9 @@ from lxml import html
 from math import ceil
 
 
-def review_flow(lender_id):
+def fetch_all_reviews(lender_id):
     brand_id = retrieve_brand_id(lender_id)
-    all_reviews = retrieve_reviews(brand_id)
+    all_reviews = iterate_reviews(brand_id)
     my_json = json.dumps(all_reviews)
     return my_json
 
@@ -19,7 +19,7 @@ def retrieve_brand_id(lender_id):
     return brand_id
 
 
-def retrieve_reviews(id):
+def iterate_reviews(id):
     MAX_RECORDS_PER_REQUEST = 300
     url = 'https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=42825&requestmode=reviews,stats,ratingconfig,propertyconfig&page=0&sortby=reviewsubmitted&sortorder=desc&pagesize=300&AuthorLocation=All&OverallRating=0&_t=1581561333869'
 
@@ -30,13 +30,13 @@ def retrieve_reviews(id):
 
     final_array = []
     for i in range(0, num_pages):
-        reviews = fetch_review_list(id, i)
+        reviews = fetch_review_details(id, i)
         final_array.extend(reviews)
 
     return final_array
 
 
-def fetch_review_list(id, page_number):
+def fetch_review_details(id, page_number):
     # formatted url
     url = 'https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId={}&requestmode=reviews,stats,ratingconfig,propertyconfig&page={}&sortby=reviewsubmitted&sortorder=desc&pagesize=300&AuthorLocation=All&OverallRating=0&_t=1581561333869'.format(
         id, page_number)
