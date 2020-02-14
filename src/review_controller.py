@@ -3,9 +3,7 @@ from flask import Blueprint, Response
 from src.review_service import fetch_all_reviews
 
 
-
 reviews = Blueprint('reviews', __name__, url_prefix='/review')
-
 
 @reviews.route('/<path:link>')
 def get_reviews(link):

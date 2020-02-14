@@ -5,9 +5,7 @@ import requests
 from lxml import html
 
 
-
 MAX_RECORDS_PER_REQUEST = 300
-
 
 def fetch_all_reviews(lender_url):
     """
