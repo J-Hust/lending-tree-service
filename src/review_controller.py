@@ -1,6 +1,7 @@
+import re
 from flask import Blueprint, Response
 from src.review_service import fetch_all_reviews
-import re
+
 
 
 reviews = Blueprint('reviews', __name__, url_prefix='/review')
@@ -12,11 +13,11 @@ def get_reviews(link):
         reviews_json = fetch_all_reviews(link)
         resp = Response(reviews_json, status=200, mimetype='application/json')
         return resp
-    else:
-        resp = Response('The supplied url must begin with "https://www.lendingtree.com/" and end with a number',
-                        status=400,
-                        mimetype='text/plain')
-        return resp
+
+    resp = Response('The supplied url must begin with "https://www.lendingtree.com/" and end with a number',
+                    status=400,
+                    mimetype='text/plain')
+    return resp
 
 
 def is_valid_url(url):
@@ -35,4 +36,3 @@ def is_valid_url(url):
     if matches_found is not None:
         return True
     return False
-
