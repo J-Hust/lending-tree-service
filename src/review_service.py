@@ -42,7 +42,7 @@ def retrieve_brand_id(lender_url):
         r = requests.get(lender_url)
     except requests.exceptions.RequestException as err:
         print(f'error fetching url: {err}')
-        sys.exit(1)
+        return
     html_tree = html.fromstring(r.content)
     review_button = html_tree.cssselect('a.reviewBtn')
     if not review_button:
@@ -73,34 +73,6 @@ def iterate_reviews(brand_id):
     return final_list
 
 
-def fetch_review_details(id, page_number):
-    """
-    For a given review page, load the JSON and return the relevant part.
-
-    Parameters:
-    id (int): the lender's brand_id
-    page_number (int): the current page number
-
-    Returns:
-    dict: the review details
-    """
-
-    url = ("https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php"
-           f"?RequestType=&productType=&brandId={id}"
-           f"&requestmode=reviews&page={page_number}"
-           f"&sortby=reviewsubmitted&sortorder=desc&pagesize={MAX_RECORDS_PER_REQUEST}"
-           f"&AuthorLocation=All&OverallRating=0&_t=1581561333869")
-
-    try:
-        r = requests.get(url)
-    except requests.exceptions.RequestException as err:
-        print(f'error fetching url: {err}')
-        sys.exit(1)
-    response_json = r.json()
-    review_data = response_json['result']['reviews']
-    return review_data
-
-
 def fetch_review_count(id):
     """
     Return the total count of reviews for a particular lender.
@@ -127,3 +99,30 @@ def fetch_review_count(id):
     num_reviews = int(response_json['result']['statistics']['reviewCount'])
     return num_reviews
 
+
+def fetch_review_details(id, page_number):
+    """
+    For a given review page, load the JSON and return the relevant part.
+
+    Parameters:
+    id (int): the lender's brand_id
+    page_number (int): the current page number
+
+    Returns:
+    dict: the review details
+    """
+
+    url = ("https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php"
+           f"?RequestType=&productType=&brandId={id}"
+           f"&requestmode=reviews&page={page_number}"
+           f"&sortby=reviewsubmitted&sortorder=desc&pagesize={MAX_RECORDS_PER_REQUEST}"
+           f"&AuthorLocation=All&OverallRating=0&_t=1581561333869")
+
+    try:
+        r = requests.get(url)
+    except requests.exceptions.RequestException as err:
+        print(f'error fetching url: {err}')
+        sys.exit(1)
+    response_json = r.json()
+    review_data = response_json['result']['reviews']
+    return review_data

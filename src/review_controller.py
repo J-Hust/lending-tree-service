@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, Response
 from src.review_service import fetch_all_reviews
 import re
 
@@ -9,9 +9,11 @@ reviews = Blueprint('reviews', __name__, url_prefix='/review')
 @reviews.route('/<path:link>')
 def get_reviews(link):
     if is_valid_url(link):
-        return fetch_all_reviews(link)
+        reviews_json = fetch_all_reviews(link)
+        resp = Response(reviews_json, status=200, mimetype='application/json')
+        return resp
     else:
-        raise ValueError('The supplied url must begin with "https://www.lendingtree.com/" and end with a number')
+        return 'The supplied url must begin with "https://www.lendingtree.com/" and end with a number'
 
 
 def is_valid_url(url):
