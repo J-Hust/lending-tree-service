@@ -25,6 +25,11 @@ Start the application with
 python3 -m app
 ```
 The server runs on `localhost:5000`.
+
+Run tests with
+```shell script
+python3 -m unittest discover ./test/ 
+```
    
 #### Making Requests
 1. Find your desired lender's URL on Lending Tree's website.  https://www.lendingtree.com/reviews/personal/ has the list of available lenders.
