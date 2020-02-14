@@ -1,5 +1,5 @@
 from flask import Blueprint
-from src.review_service import review_flow
+from src.review_service import fetch_all_reviews
 import re
 
 reviews = Blueprint('reviews', __name__, url_prefix='/review')
@@ -9,7 +9,7 @@ reviews = Blueprint('reviews', __name__, url_prefix='/review')
 def get_reviews(link):
     if is_valid_url(link):
         lender_id = extract_lender_id_from_url(link)
-        return review_flow(lender_id)
+        return fetch_all_reviews(lender_id)
     else:
         raise ValueError('url must begin with "https://www.lendingtree.com/" and end with a number')
 
