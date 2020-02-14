@@ -5,13 +5,17 @@ from src import review_service
 # should not rely on changing data from the internet :(
 class TestReviewService(unittest.TestCase):
 
-    def test_retrieve_reviews(self):
+    def test_fetch_review_count(self):
+        review_count = review_service.fetch_review_count(42825)
+
+        self.assertEqual(review_count, 1662)
+
+    def test_iterate_reviews(self):
         r = review_service.iterate_reviews(42825)
 
-        self.assertEqual(len(r), 1662)
         self.assertEqual(isinstance(r, list), True)
 
-    def test_fetch_review_list(self):
+    def test_fetch_review_details(self):
         r = review_service.fetch_review_details(42825, 1)
 
         self.assertEqual(isinstance(r, list), True)
