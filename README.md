@@ -5,7 +5,7 @@ Built in python3 with Flask.
 
 ### Installation
 This service requires python3 to be installed on your machine.
-1. Clone this repo
+1. Clone this repo and navigate to the directory
 2. Create a virtual environment for packages:
     ```shell script
     python3 -m venv venv
