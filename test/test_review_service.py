@@ -22,5 +22,5 @@ class TestReviewService(unittest.TestCase):
         self.assertEqual(len(r), 300)
 
     def test_retrieve_brand_id(self):
-        brand_id = review_service.retrieve_brand_id(81638970)
+        brand_id = review_service.retrieve_brand_id('https://www.lendingtree.com/reviews/personal/cashnetusa/81638970')
         self.assertEqual(brand_id, 42825)
