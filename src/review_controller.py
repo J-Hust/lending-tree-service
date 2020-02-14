@@ -11,10 +11,11 @@ def get_reviews(link):
     if is_valid_url(link):
         return fetch_all_reviews(link)
     else:
-        raise ValueError('supplied url must begin with "https://www.lendingtree.com/" and end with a number')
+        raise ValueError('The supplied url must begin with "https://www.lendingtree.com/" and end with a number')
 
 
 def is_valid_url(url):
+    """Returns True if the supplied url begins with 'https://www.lendingtree.com/' and ends with a number."""
     matches_found = re.match(r'https://www\.lendingtree\.com.+/[0-9]+$', url)
 
     if matches_found is not None:
