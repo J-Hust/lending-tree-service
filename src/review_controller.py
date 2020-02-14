@@ -15,7 +15,16 @@ def get_reviews(link):
 
 
 def is_valid_url(url):
-    """Returns True if the supplied url begins with 'https://www.lendingtree.com/' and ends with a number."""
+    """
+    Returns True if the supplied url begins with 'https://www.lendingtree.com/' and ends with a number.
+
+    Parameters:
+    url (str): the lender's url
+
+    Returns:
+    bool: the validity of the supplied url
+
+    """
     matches_found = re.match(r'https://www\.lendingtree\.com.+/[0-9]+$', url)
 
     if matches_found is not None:
